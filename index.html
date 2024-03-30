@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>RELOJ js</title>
+</head>
+<body>
+  
+    <div class="reloj">
+        <div class="carareloj">
+            <div class="mano ultima-manesilla"></div>
+            <div class="mano primera-manesilla"></div>
+            <div class="mano segunda-manesilla"></div>
+        </div>
+    </div>
+
+    <script>
+       class Reloj {
+    constructor(primeramano, segundamano) {
+        this.primeramano = primeramano;
+        this.segundamano = segundamano;
+    }
+
+    setdate() {
+        const ahora = new Date();
+
+        const segundos = ahora.getSeconds();
+        const espaciosegundos = ((segundos / 60) * 360) + 90;
+        this.segundamano.style.transform = `rotate(${espaciosegundos}deg)`;
+
+        const mins = ahora.getMinutes();
+        const minsdregrees = ((mins / 60) * 360) + 90;
+        this.primeramano.style.transform = `rotate(${minsdregrees}deg)`;
+    }
+
+    iniciar() {
+        this.setdate();
+        setInterval(() => {
+            this.setdate();
+        }, 1000);
+    }
+}
+
+// Crear una instancia de la clase Reloj
+const miReloj = new Reloj(
+    document.querySelector('.primera-manesilla'),
+    document.querySelector('.segunda-manesilla')
+);
+
+// Iniciar el reloj
+miReloj.iniciar();
+
+    </script>
+
+</body>
+</html>
